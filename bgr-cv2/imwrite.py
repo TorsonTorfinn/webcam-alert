@@ -18,4 +18,4 @@ img_px = np.array(
   [255, 255, 255]]]
 )
 
-cv2.imwrite('imgs/image1.png', img_px) # img_px';; be written in this .png
+cv2.imwrite('imgs/image1.png', img_px) # basically img_px';; be written in this .png

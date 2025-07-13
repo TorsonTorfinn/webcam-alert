@@ -13,8 +13,8 @@ RECEIVER = os.getenv('receiver_gmail')
 
 def send_mail(image_path):
     email_message = EmailMessage()
-    email_message["Subject"] = "New Object was detected around"
-    email_message.set_content("Hey, move on & rm all stuff, smbd is coming in.")
+    email_message["Subject"] = "New Object was detected around."
+    email_message.set_content("Hey, watch out n rm all stuff, smbd is coming in.")
 
     with open(image_path, 'rb') as file:
         content = file.read()
@@ -27,6 +27,3 @@ def send_mail(image_path):
     gmail.login(SENDER, PASSWORD)   
     gmail.sendmail(SENDER, RECEIVER, email_message.as_string())
     gmail.quit()
-
-if __name__ == '__main__':
-    send_mail(image_path='images/kitty.png')

@@ -3,6 +3,7 @@ import time
 from emailing import send_mail
 import glob
 import os
+from threading import Thread
 
 video = cv2.VideoCapture(0)
 time.sleep(1)
@@ -53,8 +54,15 @@ while True:
 
     status_list = status_list[-2:]
     if status_list[0] == 1 and status_list[1] == 0:
-        send_mail(image_with_obj)
-        folder_cleaner()
+        send_mail_thread = Thread(target=send_mail, args=(image_with_obj, ))
+        send_mail_thread.daemon = True
+        
+        folder_cleaner_thread = Thread(target=folder_cleaner)
+        folder_cleaner_thread.daemon = True
+
+        send_mail_thread.start()
+        folder_cleaner_thread.start()
+
 
     cv2.imshow('Video', frame)
 
